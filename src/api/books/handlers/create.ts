@@ -2,12 +2,14 @@ import prisma from "../../../../prisma/client";
 import { BookHandlers } from "../interface";
 
 const createBook: BookHandlers["create"] = async (req, res) => {
+  const { title, authorId, collectionName } = req.body;
   try {
-    const { title, authorId, collectionName } = req.body;
     const newBook = await prisma.book.create({
       data: {
         title,
-        author: { connect: { id: authorId } },
+        author: {
+          connect: { id: authorId },
+        },
         collection: {
           connectOrCreate: {
             where: { name: collectionName },
