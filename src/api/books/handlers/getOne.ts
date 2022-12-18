@@ -2,8 +2,8 @@ import prisma from "../../../../prisma/client";
 import { BookHandlers } from "../interface";
 
 const getOneBook: BookHandlers["getOne"] = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const book = await prisma.book.findUniqueOrThrow({ where: { id: id } });
 
     res.status(200).json(book);

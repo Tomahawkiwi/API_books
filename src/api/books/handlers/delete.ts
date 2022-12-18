@@ -6,7 +6,7 @@ const deleteBook: BookHandlers["delete"] = async (req, res) => {
   try {
     const deletedBook = await prisma.book.delete({ where: { id } });
     res.status(200).json({
-      message: `The book "${id}" has been deleted succesfully`,
+      message: `The book "${deletedBook.title}" has been deleted succesfully`,
     });
   } catch (error) {
     console.log(error);
